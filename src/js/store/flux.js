@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			obtenerAgenda: () => {
+			obtenerContactos: () => {
 				fetch(urlAPI4geeks+'/contacts', {
 					method:'GET',
 					headers:{"Content-Type": "application/json"}
@@ -30,7 +30,79 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch((error)=> console.log(error))
 			},
 		
+			crearContacto: (name, phone, email, address) => {
+				fetch(urlAPI4geeks+'/contacts', {
+					method:'POST',
+					body: JSON.stringify(
+						{"name": name,
+						"phone": phone,
+						"email": email,
+						"address": address}),
+					headers:{"Content-Type": "application/json"}
+				})
+				.then(response => {
+					if (response.status === 201) {
+						return response.json();
+					}
+					return false; 
+				})
+				.then((data)=> {
+					if (data) {
+						const store = getStore();
+						setStore({agenda: [...store.agenda, data]});
+						console.log(data); 
+						return null;
+					}
+					alert("no hubo respuesta");
+				})
+				.catch((error)=> console.log(error))
 
+			},
+
+			editarContacto: (id) => {
+				fetch(urlAPI4geeks+'/todos/'+id, {
+					method:'PUT',
+					body: JSON.stringify({"label": editLabel, "is_done": true}),
+					headers:{"Content-Type": "application/json"}
+				})
+				.then(response => {
+					if (response.status === 200) {
+						return response.json();
+					}
+					return false; 
+				})
+				.then((data)=> {
+					if (data) {
+						setList(list.map(item => item.id === id ? { ...item, label: editLabel } : item));
+						return null;
+					}
+					alert("no hubo nada");
+				})
+				.catch((error)=> console.log(error))
+			},
+		
+			borrarContacto: (id) => {
+				if (window.confirm("are you sure you want to remove the selected task?")) {
+				fetch(urlAPI4geeks+'/todos/'+id, {
+					method:'DELETE',
+					headers:{"Content-Type": "application/json"}
+				})
+				.then(response => {
+					if (response.status === 204) {
+						return response;
+					}
+					return false;
+				})
+				.then((data)=>{
+					if (data) {           
+						setList(list.filter(item => item.id !== id)); 
+						return null;
+					}
+					alert("no hubo respuesta");
+				})
+				.catch((error)=> console.log(error))
+			}},
+		
 
 
 

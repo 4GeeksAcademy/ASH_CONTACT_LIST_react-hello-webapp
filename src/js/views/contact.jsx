@@ -8,7 +8,7 @@ import { Context } from "../store/appContext.js";
         const {actions} = useContext(Context)
         
     useEffect (() => {
-        actions.obtenerAgenda();
+        actions.obtenerContactos();
     }, [])
 
     return (
