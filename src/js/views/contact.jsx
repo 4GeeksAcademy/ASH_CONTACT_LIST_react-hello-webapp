@@ -1,11 +1,10 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useEffect, useContext} from "react";
 import ContactCard from "../component/contact_card.jsx";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
-
     const Contact = () => {
-        const {actions} = useContext(Context)
+        const {store, actions} = useContext(Context)
         
     useEffect (() => {
         actions.obtenerContactos();
@@ -17,13 +16,16 @@ import { Context } from "../store/appContext.js";
                 <Link to="/add-contact" className="btn btn-success w-100">+ Add new contact</Link>
             </div>
             <div className="">
-                <ContactCard />
+            {store.agenda.map((item) => {
+                return (
+                    <ContactCard key={item.id} id={item.id} name={item.name} email={item.email} phone={item.phone} address={item.address} />
+                )
+            } )}
             </div>
         </div>
 
     )
     
 };
-
 
 export default Contact;

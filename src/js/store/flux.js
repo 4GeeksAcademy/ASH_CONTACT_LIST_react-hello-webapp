@@ -78,7 +78,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (data) {
 						const store = getStore();
 						setStore({
-							agenda: store.agenda.map(item => item.id === id ? {...item, name: name, email: email, phone: phone, address: address} : item)});
+							agenda: store.agenda.map(item => 
+								item.id === id ? { ...item, name, email, phone, address } : item)});
 						console.log(data); 
 						return null;
 					}
@@ -89,22 +90,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 			borrarContacto: (id) => {
 				if (window.confirm("are you sure you want to remove the selected task?")) {
-				fetch(urlAPI4geeks+'/todos/'+id, {
+				fetch(urlAPI4geeks+'/contacts/'+id, {
 					method:'DELETE',
 					headers:{"Content-Type": "application/json"}
 				})
 				.then(response => {
+					console.log(response);
 					if (response.status === 204) {
 						return response;
 					}
 					return false;
 				})
 				.then((data)=>{
-					if (data) {           
-						setList(list.filter(item => item.id !== id)); 
+					if (data) {      
+						const store = getStore();
+						setStore({
+							agenda: store.agenda.filter(item => item.id !== id)});
+						console.log(data); 
+
+						// setList(list.filter(item => item.id !== id)); 
 						return null;
 					}
-					alert("no hubo respuesta");
+					alert("no hubo DATO");
 				})
 				.catch((error)=> console.log(error))
 			}},

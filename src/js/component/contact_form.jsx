@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
 function ContactForm() {
-        const {store, actions} = useContext(Context);
+        const {actions} = useContext(Context);
         const [name, setName] = useState("");
         const [email, setEmail] = useState("");
         const [phone, setPhone] = useState("");
