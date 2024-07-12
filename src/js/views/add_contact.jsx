@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
     const AddContact = () => {
@@ -8,6 +8,7 @@ import { Context } from "../store/appContext.js";
         const [email, setEmail] = useState("");
         const [phone, setPhone] = useState("");
         const [address, setAddress] = useState("");
+        const navigate = useNavigate();
 
     const handleKeyDown = (e, setter) => {
         if (e.key === "Enter") {
@@ -26,7 +27,7 @@ import { Context } from "../store/appContext.js";
         setEmail("");
         setPhone("");
         setAddress("");
-
+        navigate("/");
         };
         
     useEffect (() => {
@@ -42,19 +43,19 @@ import { Context } from "../store/appContext.js";
             <div className="d-flex justify-content-center">
             <form className="container-fluid" onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label for="exampleInputName" className="form-label">Full Name</label>
+                    <label htmlFor="exampleInputName" className="form-label">Full Name</label>
                     <input type="text" className="form-control" placeholder="Enter Full Name" id="exampleInputName" value={name} onChange={(e)=>setName(e.target.value)} onKeyDown={(e)=>handleKeyDown(e, setName)} />
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Email address</label>
+                    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" placeholder="Enter Email" id="exampleInputEmail1" value={email} onChange={(e)=>setEmail(e.target.value)} onKeyDown={(e)=>handleKeyDown(e, setEmail)} />
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPhone" className="form-label">Phone</label>
+                    <label htmlFor="exampleInputPhone" className="form-label">Phone</label>
                     <input type="text" className="form-control" placeholder="Enter Phone" id="exampleInputPhone" value={phone} onChange={(e)=>setPhone(e.target.value)} onKeyDown={(e)=>handleKeyDown(e, setPhone)} />
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputAddress" className="form-label">Address</label>
+                    <label htmlFor="exampleInputAddress" className="form-label">Address</label>
                     <input type="text" className="form-control" placeholder="Enter Address" id="exampleInputAddress" value={address} onChange={(e)=>setAddress(e.target.value)} onKeyDown={(e)=>handleKeyDown(e, setAddress)} />
                 </div>
                 <div className="container-fluid m-0 p-0">
@@ -64,7 +65,7 @@ import { Context } from "../store/appContext.js";
                     <Link to="/" className="btn btn-sm btn-link px-0">Back to contacts</Link>
                 </div>
 
-            </form>git
+            </form>
             </div>
         </div>
 

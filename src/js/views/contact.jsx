@@ -13,10 +13,10 @@ import { Context } from "../store/appContext.js";
 
     return (
         <div className="container p-5">
-            <div className="container-fluid m-5 d-flex justify-content-end">
-                <Link to="/add-contact" className="btn btn-success">Add new contact</Link>
+            <div className="container-fluid my-3 d-flex justify-content-center">
+                <Link to="/add-contact" className="btn btn-success w-100">+ Add new contact</Link>
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="">
                 <ContactCard />
             </div>
         </div>
