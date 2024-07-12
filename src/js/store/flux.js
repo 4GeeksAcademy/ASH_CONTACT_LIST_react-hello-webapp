@@ -50,7 +50,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (data) {
 						const store = getStore();
 						setStore({agenda: [...store.agenda, data]});
-						console.log(data); 
 						return null;
 					}
 					alert("no hubo respuesta");
@@ -59,10 +58,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			editarContacto: (id) => {
-				fetch(urlAPI4geeks+'/todos/'+id, {
+			editarContacto: (id, name, phone, email, address) => {
+				fetch(urlAPI4geeks+'/contacts/'+id, {
 					method:'PUT',
-					body: JSON.stringify({"label": editLabel, "is_done": true}),
+					body: JSON.stringify(
+						{"name": name,
+						"phone": phone,
+						"email": email,
+						"address": address}),
 					headers:{"Content-Type": "application/json"}
 				})
 				.then(response => {
@@ -73,7 +76,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then((data)=> {
 					if (data) {
-						setList(list.map(item => item.id === id ? { ...item, label: editLabel } : item));
+						const store = getStore();
+						setStore({
+							agenda: store.agenda.map(item => item.id === id ? {...item, name: name, email: email, phone: phone, address: address} : item)});
+						console.log(data); 
 						return null;
 					}
 					alert("no hubo nada");
