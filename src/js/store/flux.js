@@ -89,7 +89,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 		
 			borrarContacto: (id) => {
-				if (window.confirm("are you sure you want to remove the selected task?")) {
+				if (window.confirm("Si eliminas el contacto podrias generar un vacio en el espacio tiempo, estas seguro de seguir adelante con esto?")) {
 				fetch(urlAPI4geeks+'/contacts/'+id, {
 					method:'DELETE',
 					headers:{"Content-Type": "application/json"}

@@ -26,7 +26,7 @@ const EditForm = (props) => {
         setEmail(props.email);
         setPhone(props.phone);
         setAddress(props.address);
-    },[])
+    },[props])
 
     return (
                 <div className="modal fade" id={"staticBackdrop-"+props.id} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

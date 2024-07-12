@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { useNavigate } from "react-router-dom";
 import EditForm from "./contact_form_edit.jsx";
 
 function ContactCard(props) {
     const {actions} = useContext(Context)
-    const navigate = useNavigate();
 
     return (
         <>
