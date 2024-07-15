@@ -15,5 +15,4 @@ import ContactForm from "../component/contact_form.jsx";
     
 };
 
-
 export default AddContact;

@@ -9,7 +9,7 @@ import { Context } from "../store/appContext.js";
     useEffect (() => {
         actions.obtenerContactos();
     }, [])
-
+    console.log(store.agenda);
     return (
         <div className="container p-5">
             <div className="container-fluid my-3 d-flex justify-content-center">
